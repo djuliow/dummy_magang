@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sensor Monitoring - Smart Soil Monitoring System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#795950",
+                    "inverse-primary": "#88d982",
+                    "surface-bright": "#f9f9f9",
+                    "on-secondary-fixed-variant": "#5d4037",
+                    "surface-tint": "#1b6d24",
+                    "primary": "#0d631b",
+                    "background": "#f9f9f9",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#ffdbd0",
+                    "primary-container": "#2e7d32",
+                    "tertiary-fixed-dim": "#a9c7ff",
+                    "on-tertiary-fixed-variant": "#00468c",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-primary-fixed-variant": "#005312",
+                    "surface": "#f9f9f9",
+                    "on-primary-fixed": "#002204",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#88d982",
+                    "surface-container-high": "#e8e8e8",
+                    "on-surface-variant": "#40493d",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-background": "#1a1c1c",
+                    "secondary-container": "#fed3c7",
+                    "inverse-surface": "#2f3131",
+                    "outline-variant": "#bfcaba",
+                    "tertiary": "#0054a7",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-container": "#eeeeee",
+                    "tertiary-fixed": "#d6e3ff",
+                    "on-secondary-fixed": "#2c160e",
+                    "secondary": "#77574d",
+                    "tertiary-container": "#246dc8",
+                    "surface-dim": "#dadada",
+                    "on-tertiary-fixed": "#001b3d",
+                    "secondary-fixed-dim": "#e7bdb1",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#a3f69c",
+                    "on-tertiary-container": "#edf1ff",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#cbffc2",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "outline": "#707a6c",
+                    "surface-variant": "#e2e2e2",
+                    "on-surface": "#1a1c1c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "sm": "12px",
+                    "lg": "40px",
+                    "xs": "4px",
+                    "xl": "64px",
+                    "gutter": "24px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-md": ["Inter"],
+                    "label-md": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { background-color: #f9f9f9; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(13, 99, 27, 0.2);
+            box-shadow: 0 0 20px rgba(46, 125, 50, 0.08);
+        }
+        .glass-panel:hover {
+            border-color: #2e7d32;
+            transition: border-color 0.3s ease;
+        }
+        .pulse-indicator {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(46, 125, 50, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); }
+        }
+        .pulse-indicator-offline {
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(186, 26, 26, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(186, 26, 26, 0); }
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface antialiased bg-background">
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden md:hidden" id="mobile-menu-overlay"></div>
+<nav class="fixed top-0 left-0 h-screen w-72 max-w-[85vw] bg-surface/95 backdrop-blur-md border-r border-primary/20 shadow-[0_0_20px_rgba(46,125,50,0.16)] py-md px-sm z-50 -translate-x-full transition-transform duration-300 md:hidden" id="mobile-menu">
+<div class="flex items-center justify-between mb-lg px-sm">
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">AgriTech Pro</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Precision Farming</p>
+</div>
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-primary/10" id="mobile-menu-close" type="button">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-primary/10" href="dashboard.html"><span class="material-symbols-outlined">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-primary font-bold bg-primary/5" href="sensor_monitoring.html"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sensors</span><span class="font-label-md text-label-md">Sensor Monitoring</span></a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-primary/10" href="irigasi.html"><span class="material-symbols-outlined">water_drop</span><span class="font-label-md text-label-md">Irrigation Control</span></a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-primary/10" href="notifikasi.html"><span class="material-symbols-outlined">notifications</span><span class="font-label-md text-label-md">Notifications</span></a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-primary/10" href="report.html"><span class="material-symbols-outlined">assessment</span><span class="font-label-md text-label-md">Reports</span></a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-primary/10" href="setting.html"><span class="material-symbols-outlined">settings</span><span class="font-label-md text-label-md">Settings</span></a>
+</div>
+</nav>
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface/70 backdrop-blur-md border-r border-primary/20 shadow-[0_0_20px_rgba(46,125,50,0.08)] py-md px-sm z-50">
+<div class="mb-lg px-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">AgriTech Pro</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Precision Farming</p>
+</div>
+<ul class="flex flex-col gap-sm flex-1">
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="dashboard.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-primary font-bold border-r-4 border-primary bg-primary/5 hover:bg-primary/10 transition-colors duration-200" href="sensor_monitoring.html">
+<span class="material-symbols-outlined" data-icon="sensors" data-weight="fill">sensors</span>
+<span class="font-label-md text-label-md">Sensor Monitoring</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="irigasi.html">
+<span class="material-symbols-outlined" data-icon="water_drop">water_drop</span>
+<span class="font-label-md text-label-md">Irrigation Control</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="notifikasi.html">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-label-md text-label-md">Notifications</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="report.html">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="setting.html">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto">
+<button class="w-full mb-md py-sm px-md bg-error text-on-error font-label-md text-label-md rounded-lg shadow-sm hover:opacity-90 transition-opacity">Emergency Stop</button>
+<ul class="flex flex-col gap-sm border-t border-primary/20 pt-sm">
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Log Out</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="md:ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-margin-desktop h-20 bg-surface/70 backdrop-blur-md border-b border-primary/20 shadow-sm sticky top-0 z-40">
+<div class="flex items-center gap-sm">
+<button class="md:hidden p-2 -ml-2 rounded-full text-primary hover:bg-primary/10" id="mobile-menu-button" type="button">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-lg text-headline-lg font-semibold text-on-surface hidden lg:block">Smart Soil Monitoring System</h2>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface lg:hidden">AgriTech Pro</h2>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden sm:block">
+<input class="bg-surface-container-highest border-none rounded-full py-xs pl-md pr-xl font-body-md text-body-md focus:ring-2 focus:ring-primary/50 w-64 placeholder-on-surface-variant" placeholder="Search..." type="text"/>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-all p-xs rounded-full hover:bg-primary/10">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-all p-xs rounded-full hover:bg-primary/10 relative">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-primary/20 overflow-hidden ml-sm cursor-pointer">
+<!-- User Avatar Placeholder -->
+<div class="w-full h-full bg-primary/20 flex items-center justify-center text-primary font-bold">MP</div>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop space-y-xl">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Sensor Fleet Status</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time telemetry and hardware diagnostics across all sectors.</p>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md py-sm px-md rounded-lg shadow-sm hover:bg-primary-container transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+                    Calibrate All Sensors
+                </button>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Farm Map - Spans 8 cols -->
+<div class="lg:col-span-8 glass-panel rounded-xl overflow-hidden flex flex-col h-[500px]">
+<div class="px-md py-sm border-b border-primary/20 flex justify-between items-center bg-surface/50">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="map">map</span>
+                            Sector Map
+                        </h3>
+<div class="flex gap-sm">
+<span class="flex items-center gap-xs font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-primary pulse-indicator"></span> Active</span>
+<span class="flex items-center gap-xs font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-error pulse-indicator-offline"></span> Offline</span>
+</div>
+</div>
+<div class="flex-1 relative bg-surface-container-low overflow-hidden">
+<!-- Placeholder for Map image -->
+<div class="absolute inset-0 bg-surface-container flex items-center justify-center">
+<span class="font-body-lg text-body-lg text-on-surface-variant">Farm Map Rendering (Interactive)</span>
+</div>
+<!-- Sensor Map Markers (Simulated) -->
+<div class="absolute top-1/4 left-1/4 group cursor-pointer">
+<div class="w-4 h-4 rounded-full bg-primary pulse-indicator border-2 border-surface"></div>
+<div class="hidden group-hover:block absolute top-6 left-1/2 -translate-x-1/2 glass-panel p-sm rounded-lg whitespace-nowrap z-10 w-48">
+<p class="font-label-md text-label-md font-bold mb-xs">Node MCU #Alpha</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Moisture: 42% | pH: 6.8</p>
+</div>
+</div>
+<div class="absolute top-1/2 right-1/3 group cursor-pointer">
+<div class="w-4 h-4 rounded-full bg-error pulse-indicator-offline border-2 border-surface"></div>
+<div class="hidden group-hover:block absolute top-6 left-1/2 -translate-x-1/2 glass-panel p-sm rounded-lg whitespace-nowrap z-10 border-error/50 w-48">
+<p class="font-label-md text-label-md font-bold text-error mb-xs">Node MCU #Beta</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">CONNECTION LOST</p>
+</div>
+</div>
+<div class="absolute bottom-1/3 left-1/2 group cursor-pointer">
+<div class="w-4 h-4 rounded-full bg-primary pulse-indicator border-2 border-surface"></div>
+<div class="hidden group-hover:block absolute top-6 left-1/2 -translate-x-1/2 glass-panel p-sm rounded-lg whitespace-nowrap z-10 w-48">
+<p class="font-label-md text-label-md font-bold mb-xs">Node MCU #Gamma</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Moisture: 38% | Temp: 24°C</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Hardware Status List - Spans 4 cols -->
+<div class="lg:col-span-4 glass-panel rounded-xl flex flex-col h-[500px]">
+<div class="px-md py-sm border-b border-primary/20 bg-surface/50">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="memory">memory</span>
+                            Hardware Nodes
+                        </h3>
+</div>
+<div class="flex-1 overflow-y-auto p-sm space-y-sm">
+<!-- Node Item 1 -->
+<div class="p-sm rounded-lg border border-primary/10 bg-surface-container-lowest hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h4 class="font-label-md text-label-md font-bold">Node-A1 (North Sector)</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Uptime: 45d 12h</p>
+</div>
+<span class="bg-primary/10 text-primary font-label-sm text-label-sm px-2 py-1 rounded-full uppercase">Online</span>
+</div>
+<div class="grid grid-cols-3 gap-xs text-center">
+<div class="bg-surface-container-low p-xs rounded">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">BATTERY</p>
+<p class="font-label-md text-label-md">88%</p>
+</div>
+<div class="bg-surface-container-low p-xs rounded">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">SIGNAL</p>
+<p class="font-label-md text-label-md">-65dBm</p>
+</div>
+<div class="bg-surface-container-low p-xs rounded">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">TEMP</p>
+<p class="font-label-md text-label-md">32°C</p>
+</div>
+</div>
+</div>
+<!-- Node Item 2 -->
+<div class="p-sm rounded-lg border border-error/20 bg-surface-container-lowest hover:border-error/50 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h4 class="font-label-md text-label-md font-bold text-error">Node-B2 (East Sector)</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Last seen: 2h ago</p>
+</div>
+<span class="bg-error/10 text-error font-label-sm text-label-sm px-2 py-1 rounded-full uppercase">Offline</span>
+</div>
+<div class="grid grid-cols-3 gap-xs text-center opacity-50">
+<div class="bg-surface-container-low p-xs rounded">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">BATTERY</p>
+<p class="font-label-md text-label-md">--</p>
+</div>
+<div class="bg-surface-container-low p-xs rounded">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">SIGNAL</p>
+<p class="font-label-md text-label-md">--</p>
+</div>
+<div class="bg-surface-container-low p-xs rounded">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">TEMP</p>
+<p class="font-label-md text-label-md">--</p>
+</div>
+</div>
+</div>
+<!-- Node Item 3 -->
+<div class="p-sm rounded-lg border border-primary/10 bg-surface-container-lowest hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h4 class="font-label-md text-label-md font-bold">Node-C3 (South Sector)</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Uptime: 12d 4h</p>
+</div>
+<span class="bg-primary/10 text-primary font-label-sm text-label-sm px-2 py-1 rounded-full uppercase">Online</span>
+</div>
+<div class="grid grid-cols-3 gap-xs text-center">
+<div class="bg-surface-container-low p-xs rounded">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">BATTERY</p>
+<p class="font-label-md text-label-md">92%</p>
+</div>
+<div class="bg-surface-container-low p-xs rounded">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">SIGNAL</p>
+<p class="font-label-md text-label-md">-70dBm</p>
+</div>
+<div class="bg-surface-container-low p-xs rounded">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">TEMP</p>
+<p class="font-label-md text-label-md">30°C</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Data Charts - Full Width -->
+<div class="lg:col-span-12 glass-panel rounded-xl overflow-hidden mt-md">
+<div class="px-md py-sm border-b border-primary/20 bg-surface/50 flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="monitoring">monitoring</span>
+                            Aggregated Telemetry (Last 24h)
+                        </h3>
+<div class="flex gap-sm">
+<button class="font-label-sm text-label-sm px-sm py-xs rounded border border-primary/20 hover:bg-primary/10">pH</button>
+<button class="font-label-sm text-label-sm px-sm py-xs rounded border border-primary bg-primary/10 text-primary font-bold">Moisture</button>
+<button class="font-label-sm text-label-sm px-sm py-xs rounded border border-primary/20 hover:bg-primary/10">Temp</button>
+</div>
+</div>
+<div class="p-md h-[300px] flex items-center justify-center bg-surface-container-lowest">
+<!-- Chart Placeholder -->
+<div class="w-full h-full border-l border-b border-outline-variant relative flex items-end justify-between px-md pt-lg pb-xs">
+<div class="absolute left-[-30px] top-0 h-full flex flex-col justify-between text-[10px] text-on-surface-variant">
+<span>100%</span>
+<span>50%</span>
+<span>0%</span>
+</div>
+<!-- Mock Bars for Moisture -->
+<div class="w-1/12 h-[40%] bg-primary/40 rounded-t-sm hover:bg-primary/60 transition-colors"></div>
+<div class="w-1/12 h-[45%] bg-primary/40 rounded-t-sm hover:bg-primary/60 transition-colors"></div>
+<div class="w-1/12 h-[38%] bg-primary/40 rounded-t-sm hover:bg-primary/60 transition-colors"></div>
+<div class="w-1/12 h-[50%] bg-primary/40 rounded-t-sm hover:bg-primary/60 transition-colors"></div>
+<div class="w-1/12 h-[48%] bg-primary/40 rounded-t-sm hover:bg-primary/60 transition-colors"></div>
+<div class="w-1/12 h-[60%] bg-primary/60 rounded-t-sm hover:bg-primary/80 transition-colors relative group">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-surface p-xs rounded border border-primary/20 text-[10px]">Irrigation Started</div>
+</div>
+<div class="w-1/12 h-[75%] bg-primary/80 rounded-t-sm hover:bg-primary transition-colors"></div>
+<div class="w-1/12 h-[70%] bg-primary/80 rounded-t-sm hover:bg-primary transition-colors"></div>
+<div class="absolute bottom-[-20px] w-full flex justify-between text-[10px] text-on-surface-variant pr-md">
+<span>00:00</span>
+<span>06:00</span>
+<span>12:00</span>
+<span>18:00</span>
+<span>Now</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+function setMobileMenu(open) {
+    mobileMenu.classList.toggle('-translate-x-full', !open);
+    mobileMenuOverlay.classList.toggle('hidden', !open);
+    document.body.classList.toggle('overflow-hidden', open);
+}
+
+mobileMenuButton?.addEventListener('click', () => setMobileMenu(true));
+mobileMenuClose?.addEventListener('click', () => setMobileMenu(false));
+mobileMenuOverlay?.addEventListener('click', () => setMobileMenu(false));
+</script>
+</body></html>

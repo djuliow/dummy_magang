@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notifications &amp; Alerts - AgriTech Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-container": "#795950",
+                      "inverse-primary": "#88d982",
+                      "surface-bright": "#f9f9f9",
+                      "on-secondary-fixed-variant": "#5d4037",
+                      "surface-tint": "#1b6d24",
+                      "primary": "#0d631b",
+                      "background": "#f9f9f9",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed": "#ffdbd0",
+                      "primary-container": "#2e7d32",
+                      "tertiary-fixed-dim": "#a9c7ff",
+                      "on-tertiary-fixed-variant": "#00468c",
+                      "on-secondary": "#ffffff",
+                      "inverse-on-surface": "#f1f1f1",
+                      "on-primary-fixed-variant": "#005312",
+                      "surface": "#f9f9f9",
+                      "on-primary-fixed": "#002204",
+                      "on-error-container": "#93000a",
+                      "primary-fixed-dim": "#88d982",
+                      "surface-container-high": "#e8e8e8",
+                      "on-surface-variant": "#40493d",
+                      "surface-container-highest": "#e2e2e2",
+                      "on-background": "#1a1c1c",
+                      "secondary-container": "#fed3c7",
+                      "inverse-surface": "#2f3131",
+                      "outline-variant": "#bfcaba",
+                      "tertiary": "#0054a7",
+                      "surface-container-low": "#f3f3f3",
+                      "surface-container": "#eeeeee",
+                      "tertiary-fixed": "#d6e3ff",
+                      "on-secondary-fixed": "#2c160e",
+                      "secondary": "#77574d",
+                      "tertiary-container": "#246dc8",
+                      "surface-dim": "#dadada",
+                      "on-tertiary-fixed": "#001b3d",
+                      "secondary-fixed-dim": "#e7bdb1",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#a3f69c",
+                      "on-tertiary-container": "#edf1ff",
+                      "error": "#ba1a1a",
+                      "on-primary-container": "#cbffc2",
+                      "on-tertiary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-error": "#ffffff",
+                      "outline": "#707a6c",
+                      "surface-variant": "#e2e2e2",
+                      "on-surface": "#1a1c1c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "48px",
+                      "sm": "12px",
+                      "lg": "40px",
+                      "xs": "4px",
+                      "xl": "64px",
+                      "gutter": "24px",
+                      "base": "8px",
+                      "margin-mobile": "16px",
+                      "md": "24px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Custom Toggle Switch for modern aesthetic */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #0d631b;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #0d631b;
+        }
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(136, 217, 130, 0.2);
+            box-shadow: 0 8px 32px rgba(46, 125, 50, 0.04);
+            border-radius: 0.75rem;
+        }
+        .glass-card:hover {
+            border-color: #2e7d32;
+            transition: border-color 0.3s ease;
+        }
+        /* Custom Scrollbar for list */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgba(112, 122, 108, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen overflow-hidden flex">
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden md:hidden" id="mobile-menu-overlay"></div>
+<nav class="fixed top-0 left-0 h-screen w-72 max-w-[85vw] bg-surface/95 backdrop-blur-md border-r border-primary/20 shadow-[0_0_20px_rgba(46,125,50,0.16)] py-md px-sm z-50 -translate-x-full transition-transform duration-300 md:hidden" id="mobile-menu">
+<div class="flex items-center justify-between mb-lg px-sm">
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">AgriTech Pro</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Precision Farming</p>
+</div>
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-primary/10" id="mobile-menu-close" type="button"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-primary/10" href="dashboard.html"><span class="material-symbols-outlined">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-primary/10" href="sensor_monitoring.html"><span class="material-symbols-outlined">sensors</span><span class="font-label-md text-label-md">Sensor Monitoring</span></a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-primary/10" href="irigasi.html"><span class="material-symbols-outlined">water_drop</span><span class="font-label-md text-label-md">Irrigation Control</span></a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-primary font-bold bg-primary/5" href="notifikasi.html"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span><span class="font-label-md text-label-md">Notifications</span></a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-primary/10" href="report.html"><span class="material-symbols-outlined">assessment</span><span class="font-label-md text-label-md">Reports</span></a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-primary/10" href="setting.html"><span class="material-symbols-outlined">settings</span><span class="font-label-md text-label-md">Settings</span></a>
+</div>
+</nav>
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface/70 backdrop-blur-md border-r border-primary/20 shadow-[0_0_20px_rgba(46,125,50,0.08)] py-md px-sm z-50">
+<div class="mb-lg px-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">AgriTech Pro</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Precision Farming</p>
+</div>
+<ul class="flex flex-col gap-sm flex-1">
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="dashboard.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="sensor_monitoring.html">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+<span class="font-label-md text-label-md">Sensor Monitoring</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="irigasi.html">
+<span class="material-symbols-outlined" data-icon="water_drop">water_drop</span>
+<span class="font-label-md text-label-md">Irrigation Control</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-primary font-bold border-r-4 border-primary bg-primary/5 hover:bg-primary/10 transition-colors duration-200" href="notifikasi.html">
+<span class="material-symbols-outlined" data-icon="notifications" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-label-md text-label-md">Notifications</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="report.html">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="setting.html">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto">
+<button class="w-full mb-md py-sm px-md bg-error text-on-error font-label-md text-label-md rounded-lg shadow-sm hover:opacity-90 transition-opacity">Emergency Stop</button>
+<ul class="flex flex-col gap-sm border-t border-primary/20 pt-sm">
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-xs rounded-DEFAULT text-on-surface-variant hover:bg-primary/10 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Log Out</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="md:ml-64 flex-1 flex flex-col min-w-0 h-screen">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-20 bg-surface/70 backdrop-blur-md border-b border-primary/20 shadow-sm sticky top-0 z-40">
+<div class="flex items-center gap-sm">
+<button class="md:hidden p-2 -ml-2 rounded-full text-primary hover:bg-primary/10" id="mobile-menu-button" type="button">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-semibold text-on-surface">Smart Soil Monitoring System</h2>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex items-center bg-surface-container-low rounded-full px-sm py-xs border border-outline-variant focus-within:ring-2 focus-within:ring-primary/50 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-xs text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 font-body-md text-body-md text-on-surface w-48 placeholder:text-on-surface-variant/50" placeholder="Search..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-all focus:ring-2 focus:ring-primary/50 rounded-full p-2">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-all focus:ring-2 focus:ring-primary/50 rounded-full p-2 relative">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<img alt="Manager Profile" class="w-10 h-10 rounded-full border border-primary/30 object-cover cursor-pointer hover:border-primary transition-colors focus:ring-2 focus:ring-primary/50" data-alt="A small, circular profile picture of an agricultural manager, a middle-aged woman with glasses smiling professionally. Soft, bright lighting, light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDo3lCyL6juHqhfXPxe-jjBPkRXOObo6fzu_gV_auFu0ilwhK16vSbNEgAkx2oyLqSEnoDdQrHQHTBsAiGORVDc4gKe0_L7TYel17Tyc5X-CFNzyXSa7n0VTuHlvMQvTdNz1IVgwe4J_hUjjxGzCf4JkwjSL6A0DeseuIPTvZURIDS3raq8OhwdJtEYw91Vuh2B7l5Sb1-LCgC5P-MlqjJNgsxwfpL0kF_-7khlBbLk3Hrs7fKzioDpiyR7RUxUOXphOX1OXV-dP6Y"/>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto custom-scrollbar p-margin-mobile md:p-margin-desktop">
+<!-- Page Header -->
+<div class="mb-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-xs">Alerts &amp; Messaging</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Monitor system anomalies and configure external notification integrations.</p>
+</div>
+<!-- Bento Grid -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Alert History Card (Spans 8 columns) -->
+<div class="col-span-12 lg:col-span-8 glass-card p-lg flex flex-col h-[600px]">
+<div class="flex justify-between items-center mb-md border-b border-outline-variant/20 pb-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history</span>
+                            Recent Alerts
+                        </h2>
+<button class="font-label-sm text-label-sm text-primary hover:bg-primary/10 px-sm py-xs rounded transition-colors">Clear All</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar pr-sm space-y-sm">
+<!-- Alert Item 1 (High Temp) -->
+<div class="flex items-start gap-md p-sm rounded-lg hover:bg-surface-container-low/50 transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="bg-error-container/30 p-2 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-error">thermostat</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md font-bold text-on-surface">Zone B High Temperature</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Just now</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Soil temperature exceeded 32°C threshold (Currently: 34.2°C).</p>
+</div>
+<span class="font-label-sm text-label-sm bg-error-container text-on-error-container px-3 py-1 rounded-full flex-shrink-0">CRITICAL</span>
+</div>
+<!-- Alert Item 2 (Low Moisture) -->
+<div class="flex items-start gap-md p-sm rounded-lg hover:bg-surface-container-low/50 transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="bg-primary-container/30 p-2 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-primary-container">water_drop</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md font-bold text-on-surface">Sector 4 Low Moisture</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">12 mins ago</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Moisture levels dropped below 20%. Automated irrigation engaged.</p>
+</div>
+<span class="font-label-sm text-label-sm bg-primary-container text-on-primary-container px-3 py-1 rounded-full flex-shrink-0">RESOLVED</span>
+</div>
+<!-- Alert Item 3 (System) -->
+<div class="flex items-start gap-md p-sm rounded-lg hover:bg-surface-container-low/50 transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="bg-surface-variant/50 p-2 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant">router</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md font-bold text-on-surface">Gateway Sync Delayed</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2 hrs ago</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Main sensor gateway experienced a 45-second latency spike.</p>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full flex-shrink-0">INFO</span>
+</div>
+</div>
+</div>
+<!-- Right Column (Settings & Integrations) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- Telegram Integration Card -->
+<div class="glass-card p-lg">
+<div class="flex justify-between items-start mb-md">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">send</span>
+                                Telegram Bot
+                            </h2>
+<!-- Status Badge -->
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm px-3 py-1 rounded-full border border-primary-container/30 bg-primary-container/10 text-primary-container">
+<div class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></div>
+                                CONNECTED
+                            </div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Receive instant critical alerts directly to your mobile device via Telegram.</p>
+<div class="space-y-sm mb-md">
+<label class="block font-label-sm text-label-sm text-on-surface">Bot Token</label>
+<input class="w-full bg-surface border border-outline-variant rounded-lg p-sm font-label-sm text-label-sm text-on-surface focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-shadow" readonly="" type="password" value="123456789:ABCdefGHIjklMNOpqrSTUvwxYZ"/>
+</div>
+<div class="space-y-sm mb-lg">
+<label class="block font-label-sm text-label-sm text-on-surface">Chat ID</label>
+<input class="w-full bg-surface border border-outline-variant rounded-lg p-sm font-label-sm text-label-sm text-on-surface focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-shadow" readonly="" type="text" value="-100987654321"/>
+</div>
+<button class="w-full bg-surface-container border border-outline-variant text-on-surface font-label-md text-label-md py-sm rounded-lg hover:bg-surface-variant transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                            Edit Configuration
+                        </button>
+</div>
+<!-- Alert Preferences Card -->
+<div class="glass-card p-lg flex-1">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">tune</span>
+                            Alert Preferences
+                        </h2>
+<div class="space-y-md">
+<!-- Toggle Item -->
+<div class="flex justify-between items-center">
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold">Critical Temperature</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Send when &gt; 30°C</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-outline-variant z-10 top-0 left-0 transition-all duration-300" id="toggle1" name="toggle1" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="toggle1"></label>
+</div>
+</div>
+<!-- Toggle Item -->
+<div class="flex justify-between items-center">
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold">Low Moisture Warning</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Send when &lt; 25%</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-outline-variant z-10 top-0 left-0 transition-all duration-300" id="toggle2" name="toggle2" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="toggle2"></label>
+</div>
+</div>
+<!-- Toggle Item -->
+<div class="flex justify-between items-center">
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold">System Offline</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Gateway connection lost</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-outline-variant z-10 top-0 left-0 transition-all duration-300" id="toggle3" name="toggle3" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="toggle3"></label>
+</div>
+</div>
+<!-- Toggle Item -->
+<div class="flex justify-between items-center">
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold">Daily Summary</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Sent at 08:00 AM</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-outline-variant z-10 top-0 left-0 transition-all duration-300" id="toggle4" name="toggle4" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="toggle4"></label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+function setMobileMenu(open) {
+    mobileMenu.classList.toggle('-translate-x-full', !open);
+    mobileMenuOverlay.classList.toggle('hidden', !open);
+    document.body.classList.toggle('overflow-hidden', open);
+}
+
+mobileMenuButton?.addEventListener('click', () => setMobileMenu(true));
+mobileMenuClose?.addEventListener('click', () => setMobileMenu(false));
+mobileMenuOverlay?.addEventListener('click', () => setMobileMenu(false));
+</script>
+</body></html>
