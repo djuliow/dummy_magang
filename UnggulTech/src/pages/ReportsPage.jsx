@@ -2,7 +2,6 @@ import React from 'react';
 import ReportFilters from '../components/Reports/ReportFilters';
 import AnalyticsCard from '../components/Reports/AnalyticsCard';
 import HealthTrendsChart from '../components/Reports/HealthTrendsChart';
-import WaterUsagePerZone from '../components/Reports/WaterUsagePerZone';
 
 const ReportsPage = () => {
   return (
@@ -10,17 +9,7 @@ const ReportsPage = () => {
       <ReportFilters />
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <AnalyticsCard 
-          title="Water Efficiency" 
-          value="94" 
-          unit="%" 
-          trend="up" 
-          trendValue="+2.4% vs last week" 
-          icon="water_drop" 
-          iconColor="text-[#2e7d32]" 
-          bgColor="bg-[#0d631b]/10"
-        />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <AnalyticsCard 
           title="Soil Health Index" 
           value="8.7" 
@@ -42,9 +31,8 @@ const ReportsPage = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6">
         <HealthTrendsChart />
-        <WaterUsagePerZone />
       </div>
     </div>
   );
